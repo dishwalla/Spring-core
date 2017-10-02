@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+ 		http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+ 		http://www.springframework.org/schema/util
+ 		http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	
+	<import resource="services.xml"/>
+	
+	<bean id="app" class="ua.epam.spring.hometask.App">
+		<constructor-arg ref="userlogic" />
+		<constructor-arg ref="ticketlogic" />
+		<constructor-arg ref="eventlogic"/>
+	</bean>
+	
+	<bean id="userlogic" class="ua.epam.spring.hometask.logic.UserLogic">
+		<property name="userService" ref="userService"/>
+		<property name="idGenerator" ref="idGenerator"/>
+	</bean>
+	
+	<bean id="idGenerator" class="ua.epam.spring.hometask.IdGenerator"/>
+	
+	<bean id="ticketlogic" class="ua.epam.spring.hometask.logic.TicketLogic"/>
+	
+	<bean id="eventlogic" class="ua.epam.spring.hometask.logic.EventLogic"/>
+	
+	<!--bean class="org.springframework.beans.factory.config.propertyplaceholderconfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:auditorium.properties</value>
+			</list>
+		</property>
+		<property name="ignoreresourcenotfound" value="true" />
+		<property name="systempropertiesmode">
+			<util:constant
+					static-field="org.springframework.beans.factory.config.propertyplaceholderconfigurer.system_properties_mode_override" />
+		</property>
+	</bean-->
+	
+</beans>
