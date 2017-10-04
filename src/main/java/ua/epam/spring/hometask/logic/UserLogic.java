@@ -14,6 +14,15 @@ import java.util.Scanner;
 public class UserLogic {
     private UserServiceImpl userService;
     private IdGenerator idGenerator;
+    private EventLogic eventLogic;
+    
+    public EventLogic getEventLogic() {
+        return eventLogic;
+    }
+    
+    public void setEventLogic(EventLogic eventLogic) {
+        this.eventLogic = eventLogic;
+    }
     
     public UserServiceImpl getUserService() {
         return userService;
@@ -130,10 +139,16 @@ public class UserLogic {
     }
     
     
-    public void viewEvents(){}
+    public void viewEvents(){
+        eventLogic.eventGenerator();
+        eventLogic.showEvents();
+    }
+    
+    
     public void getTicketPrices(){}
     public void buyTickets(){}
     public void viewPurchasedTickets(){}
-    public void enterEvents(){}
+    public void enterEvents(){
+    }
     
 }

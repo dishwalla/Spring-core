@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+ 		http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+ 		http://www.springframework.org/schema/util
+ 		http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	
+	<import resource="services.xml"/>
+	
+	<bean id="idGenerator" class="ua.epam.spring.hometask.IdGenerator"/>
+	<bean id="localDateTime" class="java.time.LocalDateTime" factory-method="now"/>
+	
+	<bean id="userlogic" class="ua.epam.spring.hometask.logic.UserLogic">
+		<property name="userService" ref="userService"/>
+		<property name="idGenerator" ref="idGenerator"/>
+		<property name="eventLogic" ref="eventLogic"/>
+	</bean>
+	
+	<bean id="ticketlogic" class="ua.epam.spring.hometask.logic.TicketLogic"/>
+	
+	<bean id="eventLogic" class="ua.epam.spring.hometask.logic.EventLogic">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+	
+	
+	<bean id="event" class="ua.epam.spring.hometask.domain.Event">
+		<property name="auditoriums">
+			<util:map map-class="java.util.TreeMap">
+				<entry key-ref="localDateTime" value-ref="auditorium" />
+			</util:map>
+		</property>
+	</bean>
+	
+</beans>

@@ -10,5 +10,8 @@ public enum EventRating {
     MID,
 
     HIGH;
-
+    
+    public static EventRating getRandom() {
+        return values()[(int) (Math.random() * values().length)];
+    }
 }

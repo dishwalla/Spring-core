@@ -19,7 +19,6 @@ public class App {
     private UserLogic userLogic;
     private TicketLogic ticketLogic;
     private EventLogic eventLogic;
-    private User user;
     
     public App(UserLogic userLogic, TicketLogic ticketLogic, EventLogic eventLogic){
         this.userLogic = userLogic;

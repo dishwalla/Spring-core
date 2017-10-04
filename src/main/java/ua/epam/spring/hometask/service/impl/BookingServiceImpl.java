@@ -14,8 +14,10 @@ import java.util.Set;
  * Created by dish on 01.10.17.
  */
 public class BookingServiceImpl implements BookingService{
+    
+    
     @Override
-    public double getTicketsPrice(@Nonnull Event event, @Nonnull LocalDateTime dateTime, @Nullable User user, @Nonnull Set<Long> seats) {
+    public double getTicketsPrice(Event event, LocalDateTime dateTime, User user, Set<Long> seats) {
         return 0;
     }
     
@@ -24,9 +26,8 @@ public class BookingServiceImpl implements BookingService{
         
     }
     
-    @Nonnull
     @Override
-    public Set<Ticket> getPurchasedTicketsForEvent(@Nonnull Event event, @Nonnull LocalDateTime dateTime) {
+    public Set<Ticket> getPurchasedTicketsForEvent(Event event, LocalDateTime dateTime) {
         return null;
     }
 }

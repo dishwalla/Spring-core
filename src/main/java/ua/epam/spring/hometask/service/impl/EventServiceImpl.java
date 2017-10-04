@@ -1,5 +1,6 @@
 package ua.epam.spring.hometask.service.impl;
 
+import ua.epam.spring.hometask.dao.EventRepository;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.service.EventService;
 
@@ -12,30 +13,34 @@ import java.util.Collection;
  */
 public class EventServiceImpl implements EventService {
     
-    @Nullable
-    @Override
-    public Event getByName(@Nonnull String name) {
-        return null;
+    private EventRepository eventRepository;
+    
+    public EventServiceImpl(EventRepository eventRepository){
+        this.eventRepository = eventRepository;
     }
     
     @Override
-    public Event save(@Nonnull Event object) {
-        return null;
+    public Event getByName(String name) {
+        return eventRepository.getByName(name);
     }
     
     @Override
-    public void remove(@Nonnull Event object) {
-        
+    public Event save(Event event) {
+        return eventRepository.save(event);
     }
     
     @Override
-    public Event getById(@Nonnull Long id) {
-        return null;
+    public void remove(Event event) {
+        eventRepository.remove(event);
     }
     
-    @Nonnull
+    @Override
+    public Event getById(Long id) {
+        return eventRepository.getById(id);
+    }
+    
     @Override
     public Collection<Event> getAll() {
-        return null;
+        return eventRepository.getAll();
     }
 }
