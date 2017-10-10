@@ -24,9 +24,6 @@
 	
 	<bean id="auditoriumRepository" class="ua.epam.spring.hometask.dao.MapAuditoriumRepository">
 		<constructor-arg ref="auditoriumMap"/>
-		<!--<constructor-arg ref="bookingRepository">-->
-			<!--<util:map key-type="auditoriumMap"/>-->
-		<!--</constructor-arg>-->
 	</bean>
 	
 </beans>

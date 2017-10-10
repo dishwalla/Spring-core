@@ -1,10 +1,8 @@
 package ua.epam.spring.hometask.service;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.Ticket;
@@ -30,8 +28,7 @@ public interface BookingService {
      *            Set of seat numbers that user wants to buy
      * @return total price
      */
-    public double getTicketsPrice(@Nonnull Event event, @Nonnull LocalDateTime dateTime, @Nullable User user,
-            @Nonnull Set<Long> seats);
+    double getTicketsPrice(Event event, Date dateTime, User user, Set<Long> seats);
 
     /**
      * Books tickets in internal system. If user is not
@@ -40,7 +37,7 @@ public interface BookingService {
      * @param tickets
      *            Set of tickets
      */
-    public void bookTickets(@Nonnull Set<Ticket> tickets);
+    void bookTickets(Set<Ticket> tickets);
 
     /**
      * Getting all purchased tickets for event on specific air date and time
@@ -51,6 +48,6 @@ public interface BookingService {
      *            Date and time of airing of event
      * @return set of all purchased tickets
      */
-    public @Nonnull Set<Ticket> getPurchasedTicketsForEvent(@Nonnull Event event, @Nonnull LocalDateTime dateTime);
+    Set<Ticket> getPurchasedTicketsForEvent(Event event, Date dateTime);
 
 }

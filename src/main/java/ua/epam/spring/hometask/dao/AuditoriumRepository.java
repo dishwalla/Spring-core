@@ -14,4 +14,6 @@ public interface AuditoriumRepository {
     Set<Auditorium> getAll();
     
     Auditorium getByName(String name);
+    
+    Set<String> getAuditoriumNames();
 }

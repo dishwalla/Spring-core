@@ -15,13 +15,8 @@ public class Auditorium {
     private String name;
 
     private long numberOfSeats;
-    
-    public void setVipSeats(String[] vipSeats) {
-        this.vipSeats = vipSeats;
-    }
-    
-    private String [] vipSeats;
-  //  private Set<Long> vipSeats = Collections.emptySet();
+
+    private Set<Long> vipSeats = Collections.emptySet();
 
     public Auditorium() {
     }
@@ -33,9 +28,9 @@ public class Auditorium {
      *            Seats to process
      * @return number of vip seats in request
      */
-//    public long countVipSeats(Collection<Long> seats) {
-//        return seats.stream().filter(seat -> vipSeats.contains(seat)).count();
-//    }
+    public long countVipSeats(Collection<Long> seats) {
+        return seats.stream().filter(seat -> vipSeats.contains(seat)).count();
+    }
 
     public String getName() {
         return name;
@@ -56,14 +51,14 @@ public class Auditorium {
     public Set<Long> getAllSeats() {
         return LongStream.range(1, numberOfSeats+1).boxed().collect(Collectors.toSet());
     }
-//
-//    public Set<Long> getVipSeats() {
-//        return vipSeats;
-//    }
-//
-//    public void setVipSeats(Set<Long> vipSeats) {
-//        this.vipSeats = vipSeats;
-//    }
+
+    public Set<Long> getVipSeats() {
+        return vipSeats;
+    }
+
+    public void setVipSeats(Set<Long> vipSeats) {
+        this.vipSeats = vipSeats;
+    }
 
     @Override
     public int hashCode() {
@@ -91,5 +86,13 @@ public class Auditorium {
         }
         return true;
     }
-
+    
+    @Override
+    public String toString() {
+        return "Auditorium{" +
+            "name='" + name + '\'' +
+            ", numberOfSeats=" + numberOfSeats +
+            ", vipSeats=" + vipSeats +
+            '}';
+    }
 }

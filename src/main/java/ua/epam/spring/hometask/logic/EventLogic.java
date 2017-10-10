@@ -1,11 +1,12 @@
 package ua.epam.spring.hometask.logic;
 
 import ua.epam.spring.hometask.IdGenerator;
+import ua.epam.spring.hometask.domain.Auditorium;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.EventRating;
+import ua.epam.spring.hometask.service.impl.AuditoriumServiceImpl;
 import ua.epam.spring.hometask.service.impl.EventServiceImpl;
 
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,24 +16,32 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class EventLogic {
     
+    public static final int DAY_MILLIS = 1000 * 60 * 60 * 24;
     private EventServiceImpl eventService;
+    private AuditoriumServiceImpl auditoriumService;
     
-    private static final List<Double> prices = new LinkedList<>(Arrays.asList(10.0, 15.0, 20.0, 25.0, 30.0, 35.0, 45.0, 50.0, 55.0, 60.0));
+    private static final List<Double> basePrices = new LinkedList<>(Arrays.asList(10.0, 15.0, 20.0, 25.0, 30.0, 35.0, 45.0, 50.0));
     private static final List<String> names = new LinkedList<>(Arrays.asList("Film1","Film2","Film3","Film4","Film5","Film6","Film7","Film8","Film9","Film10"));
     private static Map<String, EventRating> ratings = new ConcurrentHashMap<>();
     
     public EventLogic(){
         setRating();
     }
-    
-    // private static final Set<String> ids = new HashSet<String>();
-    // private static final Set<String> names = new HashSet<>(Arrays.asList("Film1", "Film2","Film3","Film4","Film5","Film6","Film7","Film8","Film9","Film10"));
-    public EventServiceImpl getEventService() {
+  
+   public EventServiceImpl getEventService() {
         return eventService;
     }
     
     public void setEventService(EventServiceImpl eventService) {
         this.eventService = eventService;
+    }
+    
+    public AuditoriumServiceImpl getAuditoriumService() {
+        return auditoriumService;
+    }
+    
+    public void setAuditoriumService(AuditoriumServiceImpl auditoriumService) {
+        this.auditoriumService = auditoriumService;
     }
     
     public void showEvents(){
@@ -48,11 +57,13 @@ public class EventLogic {
             event.setName(getName());
             event.setBasePrice(getPrice());
             event.setRating(ratings.get(event.getName()));
-            LocalDateTime now = LocalDateTime.now();
-           // event.addAirDateTime(now);
-           // event.addAirDateTime(now.plusDays(1));
-            event.addAirDateTime(now.plusDays(2));
-           // event.setAuditoriums();
+            Date now = new Date();
+            Date airDate = new Date(now.getTime() + DAY_MILLIS * getRandomInt(10));
+            event.addAirDateTime(airDate);
+            NavigableMap<Date, Auditorium> auditoriums = new TreeMap<>();
+            auditoriums.put(airDate, auditoriumService.getRandomAuditorium());
+            
+            event.setAuditoriums(auditoriums);
             eventService.save(event);
         }
     }
@@ -64,8 +75,8 @@ public class EventLogic {
         Random rn = new Random();
         for (i = 0; i < g; i++) {
             randomNum = rn.nextDouble();
-            if(!prices.contains(randomNum)){
-                prices.add(randomNum);
+            if(!basePrices.contains(randomNum)){
+                basePrices.add(randomNum);
                 return randomNum;
             } else i++;
         }
@@ -73,10 +84,10 @@ public class EventLogic {
     }
     protected double getPrice(){
         Random rn = new Random();
-        int randomNum = rn.nextInt(10);
+        int randomNum = rn.nextInt(basePrices.size());
         double price = 00.0;
-        for (int i = 0; i < prices.size(); i++) {
-            price = prices.get(randomNum);
+        for (int i = 0; i < basePrices.size(); i++) {
+            price = basePrices.get(randomNum);
             return price;
         }
         return price;
@@ -97,4 +108,10 @@ public class EventLogic {
             ratings.put(film, EventRating.getRandom());
         }
     }
+    
+    protected int getRandomInt(int a){
+        Random rn = new Random();
+        return rn.nextInt(a);
+    }
+
 }

@@ -1,6 +1,7 @@
 package ua.epam.spring.hometask.domain;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -12,11 +13,11 @@ public class Ticket extends DomainObject implements Comparable<Ticket> {
 
     private Event event;
 
-    private LocalDateTime dateTime;
+    private Date dateTime;
 
     private long seat;
 
-    public Ticket(User user, Event event, LocalDateTime dateTime, long seat) {
+    public Ticket(User user, Event event, Date dateTime, long seat) {
         this.user = user;
         this.event = event;
         this.dateTime = dateTime;
@@ -31,7 +32,7 @@ public class Ticket extends DomainObject implements Comparable<Ticket> {
         return event;
     }
 
-    public LocalDateTime getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 

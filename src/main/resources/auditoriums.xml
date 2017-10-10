@@ -27,13 +27,23 @@
 		</property>
 	</bean>
 	
-	<bean id="auditorium" class="ua.epam.spring.hometask.domain.Auditorium" p:name="${name}" p:numberOfSeats="${number_of_seats}" p:vipSeats="#{'${vip_seats}'.split(',')}">
+	<bean id="auditorium_a" class="ua.epam.spring.hometask.domain.Auditorium" p:numberOfSeats="${a.number_of_seats}" p:vipSeats="#{'${a.vip_seats}'.split(',')}">
+		<property name="name" value="${a.name}"/>
+	</bean>
+	
+	<bean id="auditorium_b" class="ua.epam.spring.hometask.domain.Auditorium" p:numberOfSeats="${b.number_of_seats}" p:vipSeats="#{'${b.vip_seats}'.split(',')}">
+		<property name="name" value="${b.name}"/>
+	</bean>
+	<bean id="auditorium_o" class="ua.epam.spring.hometask.domain.Auditorium" p:numberOfSeats="${o.number_of_seats}" p:vipSeats="#{'${o.vip_seats}'.split(',')}">
+		<property name="name" value="${o.name}"/>
 	</bean>
 	
 	<bean id="idGenerator" class="ua.epam.spring.hometask.IdGenerator" factory-method="getNextAuditoriumId"/>
 	
-	<util:map id="auditoriumMap" map-class="java.util.LinkedHashMap">
-		<entry key="idGenerator" value-ref="auditorium" />
+	<util:map id="auditoriumMap">
+		<entry key="Alfa" value-ref="auditorium_a" />
+		<entry key="Omega" value-ref="auditorium_o" />
+		<entry key="Beta" value-ref="auditorium_b" />
 	</util:map>
 	
 </beans>

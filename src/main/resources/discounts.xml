@@ -11,13 +11,11 @@
  		http://www.springframework.org/schema/util
  		http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 	
-	<import resource="logic.xml"/>
 	
-	<bean id="app" class="ua.epam.spring.hometask.App">
-		<constructor-arg ref="applogic" />
-		<constructor-arg ref="ticketLogic" />
-		<constructor-arg ref="eventLogic"/>
+	<bean id="discountStrategy" class="ua.epam.spring.hometask.service.strategies.BirthdayStrategy"/>
+			
+	<bean id="discountService" class="ua.epam.spring.hometask.service.impl.DiscountServiceImpl">
+		<property name="discountStrategy" ref="discountStrategy"/>
 	</bean>
-
 	
 </beans>

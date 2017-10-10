@@ -17,7 +17,7 @@ public interface AuditoriumService {
      * 
      * @return set of all auditoriums
      */
-    public @Nonnull Set<Auditorium> getAll();
+     Set<Auditorium> getAll();
 
     /**
      * Finding auditorium by name
@@ -26,6 +26,9 @@ public interface AuditoriumService {
      *            Name of the auditorium
      * @return found auditorium or <code>null</code>
      */
-    public @Nullable Auditorium getByName(@Nonnull String name);
-
+    Auditorium getByName(@Nonnull String name);
+    
+    Set<String> getAuditoriumNames();
+    
+    Auditorium getRandomAuditorium();
 }

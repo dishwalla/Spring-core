@@ -16,25 +16,22 @@
 	<bean id="idGenerator" class="ua.epam.spring.hometask.IdGenerator"/>
 	<bean id="localDateTime" class="java.time.LocalDateTime" factory-method="now"/>
 	
-	<bean id="userlogic" class="ua.epam.spring.hometask.logic.UserLogic">
+	<bean id="applogic" class="ua.epam.spring.hometask.logic.ApplicationLogic">
 		<property name="userService" ref="userService"/>
+		<property name="bookingService" ref="bookingService"/>
 		<property name="idGenerator" ref="idGenerator"/>
 		<property name="eventLogic" ref="eventLogic"/>
+		<property name="ticketLogic" ref="ticketLogic"/>
 	</bean>
 	
-	<bean id="ticketlogic" class="ua.epam.spring.hometask.logic.TicketLogic"/>
+	<bean id="ticketLogic" class="ua.epam.spring.hometask.logic.TicketLogic">
+		<property name="bookingService" ref="bookingService"/>
+	</bean>
 	
 	<bean id="eventLogic" class="ua.epam.spring.hometask.logic.EventLogic">
 		<property name="eventService" ref="eventService"/>
+		<property name="auditoriumService" ref="auditoriumService"/>
 	</bean>
 	
-	
-	<bean id="event" class="ua.epam.spring.hometask.domain.Event">
-		<property name="auditoriums">
-			<util:map map-class="java.util.TreeMap">
-				<entry key-ref="localDateTime" value-ref="auditorium" />
-			</util:map>
-		</property>
-	</bean>
 	
 </beans>

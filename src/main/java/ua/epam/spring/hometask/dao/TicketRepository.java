@@ -5,6 +5,7 @@ import ua.epam.spring.hometask.domain.Ticket;
 import ua.epam.spring.hometask.domain.User;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -12,9 +13,7 @@ import java.util.Set;
  */
 public interface TicketRepository {
     
-    public double getTicketsPrice(Event event, LocalDateTime dateTime, User user, Set<Long> seats);
-    
     public void bookTickets(Set<Ticket> tickets);
    
-    public Set<Ticket> getPurchasedTicketsForEvent(Event event,LocalDateTime dateTime);
+    public Set<Ticket> getPurchasedTicketsForEvent(Event event, Date dateTime);
 }

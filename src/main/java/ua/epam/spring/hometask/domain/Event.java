@@ -2,11 +2,7 @@ package ua.epam.spring.hometask.domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.NavigableMap;
-import java.util.NavigableSet;
-import java.util.Objects;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @author Yuriy_Tkach
@@ -15,13 +11,13 @@ public class Event extends DomainObject {
 
     private String name;
 
-    private NavigableSet<LocalDateTime> airDates = new TreeSet<>();
+    private NavigableSet<Date> airDates = new TreeSet<>();
 
     private double basePrice;
 
     private EventRating rating;
 
-    private NavigableMap<LocalDateTime, Auditorium> auditoriums = new TreeMap<>();
+    private NavigableMap<Date, Auditorium> auditoriums = new TreeMap<>();
     
     /**
      * Checks if event is aired on particular <code>dateTime</code> and assigns
@@ -34,7 +30,7 @@ public class Event extends DomainObject {
      * @return <code>true</code> if successful, <code>false</code> if event is
      *         not aired on that date
      */
-    public boolean assignAuditorium(LocalDateTime dateTime, Auditorium auditorium) {
+    public boolean assignAuditorium(Date dateTime, Auditorium auditorium) {
         if (airDates.contains(dateTime)) {
             auditoriums.put(dateTime, auditorium);
             return true;
@@ -63,7 +59,7 @@ public class Event extends DomainObject {
      * @return <code>true</code> if successful, <code>false</code> if already
      *         there
      */
-    public boolean addAirDateTime(LocalDateTime dateTime) {
+    public boolean addAirDateTime(Date dateTime) {
         return airDates.add(dateTime);
     }
 
@@ -77,7 +73,7 @@ public class Event extends DomainObject {
      * @return <code>true</code> if successful, <code>false</code> if already
      *         there
      */
-    public boolean addAirDateTime(LocalDateTime dateTime, Auditorium auditorium) {
+    public boolean addAirDateTime(Date dateTime, Auditorium auditorium) {
         boolean result = airDates.add(dateTime);
         if (result) {
             auditoriums.put(dateTime, auditorium);
@@ -120,7 +116,7 @@ public class Event extends DomainObject {
      * @return <code>true</code> event airs on that date
      */
     public boolean airsOnDate(LocalDate date) {
-        return airDates.stream().anyMatch(dt -> dt.toLocalDate().equals(date));
+        return airDates.stream().anyMatch(dt -> dt.equals(date));
     }
 
     /**
@@ -133,9 +129,9 @@ public class Event extends DomainObject {
      *            End date to check
      * @return <code>true</code> event airs on dates
      */
-    public boolean airsOnDates(LocalDate from, LocalDate to) {
+    public boolean airsOnDates(Date from, Date to) {
         return airDates.stream()
-                .anyMatch(dt -> dt.toLocalDate().compareTo(from) >= 0 && dt.toLocalDate().compareTo(to) <= 0);
+                .anyMatch(dt -> dt.compareTo(from) >= 0 && dt.compareTo(to) <= 0);
     }
 
     public String getName() {
@@ -146,11 +142,11 @@ public class Event extends DomainObject {
         this.name = name;
     }
 
-    public NavigableSet<LocalDateTime> getAirDates() {
+    public NavigableSet<Date> getAirDates() {
         return airDates;
     }
 
-    public void setAirDates(NavigableSet<LocalDateTime> airDates) {
+    public void setAirDates(NavigableSet<Date> airDates) {
         this.airDates = airDates;
     }
 
@@ -170,11 +166,11 @@ public class Event extends DomainObject {
         this.rating = rating;
     }
 
-    public NavigableMap<LocalDateTime, Auditorium> getAuditoriums() {
+    public NavigableMap<Date, Auditorium> getAuditoriums() {
         return auditoriums;
     }
 
-    public void setAuditoriums(NavigableMap<LocalDateTime, Auditorium> auditoriums) {
+    public void setAuditoriums(NavigableMap<Date, Auditorium> auditoriums) {
         this.auditoriums = auditoriums;
     }
 
@@ -208,7 +204,8 @@ public class Event extends DomainObject {
     @Override
     public String toString() {
         return "Event{" +
-            "name='" + name + '\'' +
+            "id='" + getId() + '\'' +
+            ", name='" + name + '\'' +
             ", airDates=" + airDates +
             ", basePrice=" + basePrice +
             ", rating=" + rating +
