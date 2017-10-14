@@ -7,12 +7,8 @@ import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.service.BookingService;
 import ua.epam.spring.hometask.service.DiscountService;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -42,7 +38,7 @@ public class BookingServiceImpl implements BookingService{
         Set<Ticket> ticketSet = tickets.stream()
             .filter(t -> t.getUser() != null)
             .collect(Collectors.toSet());
-        ticketRepository.bookTickets(ticketSet);
+        ticketRepository.saveTickets(ticketSet);
         
     }
     

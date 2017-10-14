@@ -1,5 +1,8 @@
 package ua.epam.spring.hometask.service.strategies;
 
+import ua.epam.spring.hometask.domain.Event;
+import ua.epam.spring.hometask.domain.User;
+
 import java.util.Date;
 
 /**
@@ -7,11 +10,15 @@ import java.util.Date;
  */
 public class BirthdayStrategy implements DiscountStrategy {
     
+    public static final int DISCOUNT_PERCENT = 5;
     public static int FIVE_DAYS = 5*24*60*60*1000;
     @Override
-    public int getDiscountPercentage(Date eventDate, Date bd, long ticketCount) {
-        if (Math.abs(eventDate.getTime() - bd.getTime()) < FIVE_DAYS){
-            return 5;
+    public int getDiscountPercentage(User user, Event event, Date airDateTime, long numberOfTickets) {
+        Date bd = user.getBirthday();
+        if (Math.abs(airDateTime.getTime() - bd.getTime()) < FIVE_DAYS){
+            //FIXME: bad practice to use magic numbers, it should be constant
+            //DONE
+            return DISCOUNT_PERCENT;
         }
         return 0;
     }

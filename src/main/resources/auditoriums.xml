@@ -38,8 +38,6 @@
 		<property name="name" value="${o.name}"/>
 	</bean>
 	
-	<bean id="idGenerator" class="ua.epam.spring.hometask.IdGenerator" factory-method="getNextAuditoriumId"/>
-	
 	<util:map id="auditoriumMap">
 		<entry key="Alfa" value-ref="auditorium_a" />
 		<entry key="Omega" value-ref="auditorium_o" />

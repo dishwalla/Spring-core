@@ -14,7 +14,6 @@
 	<import resource="services.xml"/>
 	
 	<bean id="idGenerator" class="ua.epam.spring.hometask.IdGenerator"/>
-	<bean id="localDateTime" class="java.time.LocalDateTime" factory-method="now"/>
 	
 	<bean id="applogic" class="ua.epam.spring.hometask.logic.ApplicationLogic">
 		<property name="userService" ref="userService"/>

@@ -20,7 +20,7 @@ public class MapTicketRepository implements TicketRepository{
     private static Map<Integer, Ticket> tickets = new ConcurrentHashMap<>();
     
     @Override
-    public void bookTickets(Set<Ticket> t) {
+    public void saveTickets(Set<Ticket> t) {
         t.stream().forEach(ticket -> {
             tickets.put(IdGenerator.getNextTicketId(), ticket);
         });

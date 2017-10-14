@@ -11,7 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MapAuditoriumRepository implements AuditoriumRepository {
     
     private static Map<String, Auditorium> auditoriums;
-    private static Set<Auditorium> aud = new HashSet<Auditorium>();
     
     public MapAuditoriumRepository(LinkedHashMap<String, Auditorium> auditoriums){
         this.auditoriums = auditoriums;
@@ -19,11 +18,11 @@ public class MapAuditoriumRepository implements AuditoriumRepository {
     
     @Override
     public Set<Auditorium> getAll() {
-        for (Map.Entry entry : auditoriums.entrySet()) {
-            aud.add((Auditorium)entry.getValue());
-            System.out.println(entry.getValue().toString());
-        }
-        return aud;
+        //FIXME: if you do that to show auditoriums on screen it's bad practice to mix logic of methods
+        //DONE
+        //FIXME: what's problem to return initial map? or auditoriums.values() ?
+        //DONE
+        return new HashSet<>(auditoriums.values());
     }
     
     @Override

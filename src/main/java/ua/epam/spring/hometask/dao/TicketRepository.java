@@ -13,7 +13,9 @@ import java.util.Set;
  */
 public interface TicketRepository {
     
-    public void bookTickets(Set<Ticket> tickets);
-   
+    //FIXME: if ticket repository is DAO then strange to have method which seems doing some booking process (especial you have this method in service layer)
+    //DONE: renamed to be more relevant
+    public void saveTickets(Set<Ticket> tickets);
+    
     public Set<Ticket> getPurchasedTicketsForEvent(Event event, Date dateTime);
 }

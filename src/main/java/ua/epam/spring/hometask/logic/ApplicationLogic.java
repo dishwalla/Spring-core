@@ -89,7 +89,7 @@ public class ApplicationLogic {
         options.add("5");
         options.add("6");
         Scanner sc = new Scanner(System.in);
-        while (!choice.equals("5")){
+        while (!choice.equals("6")){
             showUsersMenu();
             choice = sc.nextLine();
             if (!options.contains(choice)){
@@ -111,6 +111,8 @@ public class ApplicationLogic {
                 case "5":
                     switchUser();
                     break;
+                case "6":
+                    break;
             }
         }
         
@@ -125,7 +127,7 @@ public class ApplicationLogic {
         options.add("3");
         options.add("4");
         Scanner sc = new Scanner(System.in);
-        while (!choice.equals("3")){
+        while (!choice.equals("4")){
             showAdminsMenu();
             choice = sc.nextLine();
             if (!options.contains(choice)){
@@ -140,6 +142,8 @@ public class ApplicationLogic {
                     break;
                 case "3":
                     switchUser();
+                    break;
+                case "4":
                     break;
             }
         }

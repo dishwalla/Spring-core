@@ -25,8 +25,10 @@ public class DiscountServiceImpl implements DiscountService {
         this.discountStrategy = discountStrategy;
     }
     
+    //FIXME: again, looks like you pass arguments and do not use them all (it would be ok in strategy, but not here)
+    //This signature was defined in skeleton project, so I didn't touch it
     @Override
     public byte getDiscount(User user, Event event, Date airDateTime, long numberOfTickets) {
-        return (byte)discountStrategy.getDiscountPercentage(airDateTime, user.getBirthday(), numberOfTickets);
+        return (byte)discountStrategy.getDiscountPercentage(user, event, airDateTime, numberOfTickets);
     }
 }
